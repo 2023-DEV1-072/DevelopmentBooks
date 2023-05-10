@@ -8,15 +8,7 @@ public class Book {
     private Double price;
 
 
-    public Book() {
-    }
 
-    public Book(String name, String author, String date,Double price) {
-        this.title = name;
-        this.author = author;
-        this.date = date;
-        this.price=price;
-    }
 
     public Book(Long id, String name, String author, String date,Double price) {
         this.id = id;
