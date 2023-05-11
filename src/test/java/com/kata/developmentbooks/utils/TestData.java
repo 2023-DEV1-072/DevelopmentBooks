@@ -43,4 +43,7 @@ public class TestData {
     public static List<CartOrder> getFiveUniqueBooks(){
         return fivebooks;
     }
+    public static List<CartOrder> getIdenticalBooks(long count){
+        return Arrays.asList(new CartOrder(cleanCode,count));
+    }
 }

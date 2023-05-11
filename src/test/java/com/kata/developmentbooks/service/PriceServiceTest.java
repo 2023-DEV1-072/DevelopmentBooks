@@ -26,31 +26,38 @@ public class PriceServiceTest {
     @DisplayName("validate price of one book to be 50.0")
     void calculatePriceForOneItem() throws Exception {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getOneUniqueBook());
-       assertEquals(50d, finalPriceSummary.getAmount());
+       assertEquals(50d, finalPriceSummary.getFinalPrice());
     }
     @Test
     @DisplayName("validate price of two books to be 95.0")
     void calculatePriceForTwoItems() throws Exception {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getTwoUniqueBooks());
-        assertEquals(95d, finalPriceSummary.getAmount());
+        assertEquals(95d, finalPriceSummary.getFinalPrice());
     }
     @Test
     @DisplayName("validate price of three books to be 135.0")
     void calculatePriceForThreeItems() throws Exception {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getThreeUniqueBooks());
-        assertEquals(135d, finalPriceSummary.getAmount());
+        assertEquals(135d, finalPriceSummary.getFinalPrice());
     }
     @Test
     @DisplayName("validate price of four books to be 160.0")
     void calculatePriceForFourItems() throws Exception {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getFourUniqueBooks());
-        assertEquals(160d, finalPriceSummary.getAmount());
+        assertEquals(160d, finalPriceSummary.getFinalPrice());
     }
     @Test
     @DisplayName("validate price of five books to be 187.5")
     void calculatePriceForFiveItem() throws Exception {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getFiveUniqueBooks());
-        assertEquals(187.5d, finalPriceSummary.getAmount());
+        assertEquals(187.5d, finalPriceSummary.getFinalPrice());
+    }
+
+    @Test
+    @DisplayName("validate price of two books of same category to be 100.0")
+    void calculatePriceForTwoIdenticalItems() throws Exception {
+        FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getIdenticalBooks(2));
+        assertEquals(100.0d, finalPriceSummary.getFinalPrice());
     }
 
 
