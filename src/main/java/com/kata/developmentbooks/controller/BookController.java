@@ -2,6 +2,7 @@ package com.kata.developmentbooks.controller;
 
 import com.kata.developmentbooks.model.Book;
 import com.kata.developmentbooks.model.CartOrder;
+import com.kata.developmentbooks.model.FinalPriceSummary;
 import com.kata.developmentbooks.service.IBookService;
 import com.kata.developmentbooks.service.IPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class BookController {
     private IBookService bookService;
     @Autowired
     private IPriceService priceService;
-    @GetMapping("/books")
+    @GetMapping(path = "/books",produces = { MediaType.APPLICATION_JSON_VALUE })
     public List<Book> getBooks(){
         List<Book> books = bookService.getAllBooks();
         return books;

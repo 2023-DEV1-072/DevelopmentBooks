@@ -24,8 +24,18 @@ public class PriceService implements  IPriceService{
 
         HashMap<Long,CartOrder> bookHashMap = BookGroup.spiltBooksToGroup(bookList);
         List<HashMap<Long,Long>> groups = sortBooksToGroups(bookHashMap);
-        FinalPriceSummary finalPriceSummary = new FinalPriceSummary(bookList,0,calculatePriceForCart(groups));
+
+        FinalPriceSummary finalPriceSummary = new FinalPriceSummary(bookList,getBooksCount(bookList)*Constants.BOOK_PRICE,calculatePriceForCart(groups));
         return finalPriceSummary;
+    }
+
+    private long getBooksCount(List<CartOrder> bookList){
+        long booksCount =0l;
+        for (CartOrder cartOder:bookList
+             ) {
+            booksCount+=cartOder.getQuantity();
+        }
+        return booksCount;
     }
 
     private double calculatePriceForCart( List<HashMap<Long,Long>> groups){
@@ -52,7 +62,7 @@ public class PriceService implements  IPriceService{
     }
 
     private List<HashMap<Long,Long>> sortBooksToGroups(HashMap<Long,CartOrder> bookHashMap){
-        List<HashMap<Long,Long>> bookGroups =  initiateListofGroups(getBiggestBookOrder(bookHashMap));
+        List<HashMap<Long,Long>> bookGroups =  initiateListofGroups(getLargestBookOrderCount(bookHashMap));
         for (Map.Entry<Long, CartOrder> map : bookHashMap.entrySet()) {
             Book book =  map.getValue().getBook();
             long quantity = map.getValue().getQuantity();
@@ -78,15 +88,15 @@ public class PriceService implements  IPriceService{
         }
         return bookGroups;
     }
-    private long getBiggestBookOrder(HashMap<Long,CartOrder> bookHashMap){
-        long biggest=0;
+    private long getLargestBookOrderCount(HashMap<Long,CartOrder> bookHashMap){
+        long largestVoulme=0;
 
         for (Map.Entry<Long, CartOrder> map : bookHashMap.entrySet()) {
             long quantity = map.getValue().getQuantity();
-            if(biggest<quantity){
-                biggest = quantity;
+            if(largestVoulme<quantity){
+                largestVoulme = quantity;
             }
         }
-        return biggest;
+        return largestVoulme;
     }
 }
