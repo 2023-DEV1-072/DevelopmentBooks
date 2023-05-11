@@ -7,8 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BookGroup {
-    private Book book;
-    private int count;
+
     private BookGroup(){
 
     }
@@ -35,4 +34,5 @@ public class BookGroup {
             return new CartOrder(src.getBook(),src.getQuantity()+des.getQuantity());
 
     }
+
 }

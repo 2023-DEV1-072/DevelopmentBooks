@@ -54,10 +54,10 @@ public class PriceServiceTest {
     }
 
     @Test
-    @DisplayName("validate price of two books of same category to be 100.0")
+    @DisplayName("validate price of two books of same category to be 150.0")
     void calculatePriceForTwoIdenticalItems() throws Exception {
-        FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getIdenticalBooks(2));
-        assertEquals(100.0d, finalPriceSummary.getFinalPrice());
+        FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getIdenticalBooks(3));
+        assertEquals(150.0d, finalPriceSummary.getFinalPrice());
     }
 
 
