@@ -1,42 +1,37 @@
 package com.kata.developmentbooks.service;
 
-import com.kata.developmentbooks.controller.BookController;
-import com.kata.developmentbooks.model.Book;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import java.util.Arrays;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@WebMvcTest(controllers = BookController.class)
-@ExtendWith(SpringExtension.class)
-public class BookServiceTest{
+
+import java.util.HashSet;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class BookServiceTest {
+    private final int BOOK_COUNT=5;
+    @BeforeEach
+    public void init() {
+
+    }
     @Autowired
-    MockMvc mockMvc;
-
-    @MockBean
     BookService bookService;
     @Test
-    @DisplayName("validate catalogue of the  books is array and count is 5")
+    @DisplayName("validate catalogue of the  books count is 5")
     void getAllBooksTest() throws Exception {
-
-        mockMvc.perform(get("/api/books"))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$",hasSize(5)));
-
-        verify(bookService).getAllBooks();
+        assertEquals(BOOK_COUNT,bookService.getAllBooks().size());
     }
-
-
+    @Test
+    @DisplayName("validate for no duplicate values in books catalogue")
+    void checkForDuplicateEntries() throws Exception {
+        HashSet<Long> uniqueIDSet = new HashSet<Long>();
+        bookService.getAllBooks().forEach(b->uniqueIDSet.add(b.getId()));
+        assertEquals(BOOK_COUNT,uniqueIDSet.size());
+    }
 }
