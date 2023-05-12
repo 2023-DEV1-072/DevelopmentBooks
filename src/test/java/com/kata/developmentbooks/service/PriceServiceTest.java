@@ -59,6 +59,13 @@ public class PriceServiceTest {
         FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getIdenticalBooks(3));
         assertEquals(150.0d, finalPriceSummary.getFinalPrice());
     }
+    @Test
+    @DisplayName("validate price of different group for optimised discount")
+    void calculatePriceForOptimalDiscount() throws Exception {
+        FinalPriceSummary finalPriceSummary = priceService.calculatePrice(TestData.getOptimalBooksCartList());
+        assertEquals(320.0d, finalPriceSummary.getFinalPrice());
+    }
+
 
 
 

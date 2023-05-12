@@ -30,6 +30,6 @@ public class SwaggerConfig {
                 .description("Kata Development Books api documentation")
                 .termsOfServiceUrl("http://localhost:8080")
                 .license("MIT")
-                .licenseUrl("2023-DEV1-072").version("1.0").build();
+                .licenseUrl("https://github.com/2023-DEV1-072/DevelopmentBooks/blob/main/LICENSE").version("1.0").build();
     }
 }
