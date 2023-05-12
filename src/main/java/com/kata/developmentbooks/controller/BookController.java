@@ -27,7 +27,9 @@ public class BookController {
     @PostMapping(path = "/books/calculateBookPrice", produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
             MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<Object> calculateBooksPrice(@RequestBody List<CartOrder> booksOrder) {
-
+    if(priceService.checkForInvalidBookQuantity(booksOrder)){
+        return ResponseEntity.badRequest().body("InvalidBookException please provide book quantity greater than zero");
+    }
         return ResponseEntity.ok(priceService.calculatePrice(booksOrder));
     }
 }
