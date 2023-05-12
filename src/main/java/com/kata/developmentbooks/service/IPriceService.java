@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 public interface IPriceService {
     public FinalPriceSummary calculatePrice(List<CartOrder> bookList);
+    public boolean checkForInvalidBookQuantity(List<CartOrder> bookList);
 
 }

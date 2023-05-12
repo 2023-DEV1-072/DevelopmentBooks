@@ -1,9 +1,8 @@
 package com.kata.developmentbooks.service;
 
 import com.kata.developmentbooks.constants.Constants;
-import com.kata.developmentbooks.model.Book;
+import com.kata.developmentbooks.exception.InvalidBookException;
 import com.kata.developmentbooks.model.CartOrder;
-import com.kata.developmentbooks.utils.BookGroup;
 import org.springframework.stereotype.Service;
 import com.kata.developmentbooks.model.FinalPriceSummary;
 
@@ -19,13 +18,20 @@ public class PriceService implements  IPriceService{
     FIVE_ITEM=25.0;
     @Override
     public FinalPriceSummary calculatePrice(List<CartOrder> bookList){
-
-        HashMap<Long,CartOrder> bookHashMap = BookGroup.spiltBooksToGroup(bookList);
         List<Long> allBooksIdsInCart = flattenHashMapToListOfBookIds(bookList);
         List<List<HashSet<Long>>> allPossibleCombinations = getAllPossibleCombinations(allBooksIdsInCart);
         double price = getLeastFinalPriceFromSets(allPossibleCombinations);
         FinalPriceSummary finalPriceSummary = new FinalPriceSummary(bookList, allBooksIdsInCart.size()*Constants.BOOK_PRICE,price);
         return finalPriceSummary;
+    }
+
+    public boolean checkForInvalidBookQuantity(List<CartOrder> bookList)  {
+
+        for(CartOrder cart:bookList){
+            if(cart.getQuantity()<=0)
+                return true;
+        }
+        return false;
     }
 
     private double getLeastFinalPriceFromSets(List<List<HashSet<Long>>> allPossibleCombinations){
