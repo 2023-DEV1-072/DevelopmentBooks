@@ -50,7 +50,7 @@ public class PriceService implements  IPriceService{
             case 4: return actualCost * (1 - (FOUR_ITEM / 100));
             case 5: return actualCost * (1 - (FIVE_ITEM / 100));
             default :
-                return 0;
+                return actualCost;
         }
 
     }
