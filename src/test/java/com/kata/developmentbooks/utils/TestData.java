@@ -46,4 +46,12 @@ public class TestData {
     public static List<CartOrder> getIdenticalBooks(long count){
         return Arrays.asList(new CartOrder(cleanCode,count));
     }
+    public static List<CartOrder> getOptimalBooksCartList(){
+        CartOrder cleanCodeCart = new CartOrder(cleanCode,2);
+        CartOrder theCleanCoderCart = new CartOrder(theCleanCoder,2);
+        CartOrder cleanArchitectureCart = new CartOrder(cleanArchitecture,2);
+        CartOrder tddCart = new CartOrder(tdd,1);
+        CartOrder legacyCodeCart = new CartOrder(legacyCode,1);
+        return Arrays.asList(cleanCodeCart,theCleanCoderCart,cleanArchitectureCart,tddCart,legacyCodeCart);
+    }
 }
