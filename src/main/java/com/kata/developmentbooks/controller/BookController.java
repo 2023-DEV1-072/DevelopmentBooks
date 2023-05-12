@@ -28,7 +28,7 @@ public class BookController {
             MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<Object> calculateBooksPrice(@RequestBody List<CartOrder> booksOrder) {
     if(priceService.checkForInvalidBookQuantity(booksOrder)){
-        return ResponseEntity.badRequest().body("InvalidBookException please provice book quantity greater than zero");
+        return ResponseEntity.badRequest().body("InvalidBookException please provide book quantity greater than zero");
     }
         return ResponseEntity.ok(priceService.calculatePrice(booksOrder));
     }
