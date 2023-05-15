@@ -4,7 +4,6 @@ import com.kata.developmentbooks.model.Book;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 public enum BooksEnum {
         CLEAN_CODE(0, "Clean Code", "Robert Martin", "2008", 50.00),
         THE_CLEAN_CODER(1, "The Clean Coder", "Robert Martin", "2011", 50.00),
