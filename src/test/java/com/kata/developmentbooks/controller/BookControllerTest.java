@@ -39,6 +39,25 @@ public class BookControllerTest {
                 .andExpect(jsonPath("$.finalPrice").value(95.0))
                 .andExpect(status().isOk());
     }
+    @Test
+    @DisplayName("validate request  of books for zero order quantity to be 400 error series")
+    void getPriceForZeroBookSize() throws Exception {
+        String json = ObjectToJson(TestData.getIdenticalBooks(0));
+        mockMvc.perform(post("/api/books/calculateBookPrice")
+                        .contentType("application/json")
+                        .content(json))
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    @DisplayName("validate request  of books for negative order quantity to be 400 error series")
+    void getPriceForNegativeBookSize() throws Exception {
+        String json = ObjectToJson(TestData.getIdenticalBooks(-1));
+        mockMvc.perform(post("/api/books/calculateBookPrice")
+                        .contentType("application/json")
+                        .content(json))
+                .andExpect(status().is4xxClientError());
+    }
     private String ObjectToJson(Object toConvert){
         Gson gson = new Gson();
         String json = gson.toJson(toConvert);
