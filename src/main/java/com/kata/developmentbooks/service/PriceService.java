@@ -8,11 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 @Service
 public class PriceService implements  IPriceService{
-    private final double ONE_ITEM=0.0,
-    TWO_ITEM=5.0,
-    THREE_ITEM=10.0,
-    FOUR_ITEM=20.0,
-    FIVE_ITEM=25.0;
+
     @Override
     public FinalPriceSummary calculatePrice(List<CartOrder> bookList){
         List<Long> allBooksIdsInCart = flattenHashMapToListOfBookIds(bookList);
@@ -44,10 +40,10 @@ public class PriceService implements  IPriceService{
         double actualCost = bookCountInGroup * bookPrice;
         switch(bookCountInGroup){
             case 1: return bookPrice;
-            case 2: return actualCost * (1 - (TWO_ITEM / 100));
-            case 3: return actualCost * (1 - (THREE_ITEM / 100));
-            case 4: return actualCost * (1 - (FOUR_ITEM / 100));
-            case 5: return actualCost * (1 - (FIVE_ITEM / 100));
+            case 2: return actualCost * (1 - (Constants.TWO_ITEM / 100));
+            case 3: return actualCost * (1 - (Constants.THREE_ITEM / 100));
+            case 4: return actualCost * (1 - (Constants.FOUR_ITEM / 100));
+            case 5: return actualCost * (1 - (Constants.FIVE_ITEM / 100));
             default :
                 return actualCost;
         }
