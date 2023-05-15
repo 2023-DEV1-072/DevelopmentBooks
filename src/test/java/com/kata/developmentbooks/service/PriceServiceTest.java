@@ -69,4 +69,17 @@ public class PriceServiceTest {
         assertEquals(400.0d, finalPriceSummary.getInitialPrice());
     }
 
+    @Test
+    @DisplayName("validate books request for invalid zero quantity to be true")
+    void calculatePriceZeroCartOfBooks()  {
+        assertEquals(true, priceService.checkForInvalidBookQuantity(TestData.getIdenticalBooks(0)));
+
+    }
+    @Test
+    @DisplayName("validate books request for invalid negative quantity to be true")
+    void calculatePriceNegativeCartOfBooks()  {
+        assertEquals(true, priceService.checkForInvalidBookQuantity(TestData.getIdenticalBooks(-5)));
+
+    }
+
 }
