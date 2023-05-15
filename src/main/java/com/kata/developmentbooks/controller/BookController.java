@@ -1,5 +1,6 @@
 package com.kata.developmentbooks.controller;
 
+import com.kata.developmentbooks.constants.Constants;
 import com.kata.developmentbooks.model.Book;
 import com.kata.developmentbooks.model.CartOrder;
 import com.kata.developmentbooks.service.IBookService;
@@ -25,7 +26,7 @@ public class BookController {
             MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<Object> calculateBooksPrice(@RequestBody List<CartOrder> booksOrder) {
     if(priceService.checkForInvalidBookQuantity(booksOrder)){
-        return ResponseEntity.badRequest().body("InvalidBookException please provide book quantity greater than zero");
+        return ResponseEntity.badRequest().body(Constants.INVALID_BOOK_QUANTITY);
     }
         return ResponseEntity.ok(priceService.calculatePrice(booksOrder));
     }
