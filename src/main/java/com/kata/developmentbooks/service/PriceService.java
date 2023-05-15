@@ -1,14 +1,11 @@
 package com.kata.developmentbooks.service;
 
 import com.kata.developmentbooks.constants.Constants;
-import com.kata.developmentbooks.exception.InvalidBookException;
 import com.kata.developmentbooks.model.CartOrder;
 import org.springframework.stereotype.Service;
 import com.kata.developmentbooks.model.FinalPriceSummary;
-
 import java.util.*;
 import java.util.stream.Collectors;
-
 @Service
 public class PriceService implements  IPriceService{
     private final double ONE_ITEM=0.0,
@@ -24,9 +21,7 @@ public class PriceService implements  IPriceService{
         FinalPriceSummary finalPriceSummary = new FinalPriceSummary(bookList, allBooksIdsInCart.size()*Constants.BOOK_PRICE,price);
         return finalPriceSummary;
     }
-
     public boolean checkForInvalidBookQuantity(List<CartOrder> bookList)  {
-
         for(CartOrder cart:bookList){
             if(cart.getQuantity()<=0)
                 return true;
@@ -45,9 +40,7 @@ public class PriceService implements  IPriceService{
         double min = allPriceForCombinations.stream().min(Comparator.naturalOrder()).get();
         return min;
     }
-
     private double calculateDiscountForGroup(int bookCountInGroup,double bookPrice) {
-
         double actualCost = bookCountInGroup * bookPrice;
         switch(bookCountInGroup){
             case 1: return bookPrice;
@@ -58,10 +51,7 @@ public class PriceService implements  IPriceService{
             default :
                 return actualCost;
         }
-
     }
-
-
     private  List<List<HashSet<Long>>> getAllPossibleCombinations(List<Long>  allBooksInCart){
         List<List<HashSet<Long>>> allCombinations = new ArrayList<>();
         for(long i=Constants.BOOK_COUNT;i>0;i--){
@@ -110,8 +100,6 @@ public class PriceService implements  IPriceService{
                 allBooks.add(cart.getBook().getId());
             }
         }
-
         return allBooks;
     }
-
 }

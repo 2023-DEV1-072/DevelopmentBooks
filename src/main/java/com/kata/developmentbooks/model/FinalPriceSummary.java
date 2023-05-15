@@ -1,7 +1,10 @@
 package com.kata.developmentbooks.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
-
+@Getter
+@Setter
 public class FinalPriceSummary {
     private List<CartOrder> booksOrder;
     private double finalPrice;
@@ -10,16 +13,5 @@ public class FinalPriceSummary {
         this.booksOrder = booksOrder;
         this.initialPrice = initialPrice;
         this.finalPrice = finalPrice;
-    }
-
-    public List<CartOrder> getBooksOrder() {
-        return booksOrder;
-    }
-
-    public double getFinalPrice() {
-        return finalPrice;
-    }
-    public double getInitialPrice() {
-        return initialPrice;
     }
 }
